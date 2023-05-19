@@ -1,0 +1,33 @@
+import { atom, selector } from "recoil";
+
+export enum ECategories {
+  "ALL" = "ALL",
+  "DOING" = "DOING",
+  "DONE" = "DONE",
+}
+
+export interface ITodo {
+  id: number;
+  text: string;
+  category: ECategories;
+}
+
+export const todoState = atom<ITodo[]>({
+  key: "todo",
+  default: [],
+});
+
+//사용자가 선택한 카테고리
+export const categoryState = atom<ECategories>({
+  key: "category",
+  default: ECategories.ALL,
+});
+
+export const todoSelector = selector({
+  key: "todoSelector",
+  get: ({ get }) => {
+    const todos = get(todoState);
+    const category = get(categoryState);
+    return todos.filter((todo) => todo.category === category);
+  },
+});
