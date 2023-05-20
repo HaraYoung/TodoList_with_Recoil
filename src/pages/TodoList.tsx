@@ -66,7 +66,6 @@ const TodoList = () => {
     });
     setValue("value", "");
   };
-  console.log(todo);
   return (
     <Container>
       <h1>Todo List</h1>

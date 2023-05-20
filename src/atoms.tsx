@@ -1,7 +1,10 @@
 import { atom, selector } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export const darkmode = atom({
-  key: 'darkTheme',
+  key: "darkTheme",
   default: false,
 });
 
@@ -11,7 +14,8 @@ export interface IForm {
 
 export const categories = atom<string[]>({
   key: "categories",
-  default: ['ALL', 'DOING', 'DONE'],
+  default: ["ALL", "DOING", "DONE"],
+  effects_UNSTABLE: [persistAtom]
 });
 
 export interface ITodo {
@@ -23,12 +27,14 @@ export interface ITodo {
 export const todoState = atom<ITodo[]>({
   key: "todo",
   default: [],
+  effects_UNSTABLE: [persistAtom]
+
 });
 
 //사용자가 선택한 카테고리
 export const categoryState = atom<string>({
   key: "category",
-  default: 'ALL',
+  default: "ALL",
 });
 
 export const todoSelector = selector({
