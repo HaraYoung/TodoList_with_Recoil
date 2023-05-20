@@ -85,7 +85,6 @@ const TodoList = () => {
         <button>Add Category</button>
       </form>
       <span>{errors?.value?.message as string}</span>
-      <br />
       <div style={{ display: "flex" }}>
         {categoryArr.map((item, idx) => (
           <Tab key={idx}>{item}</Tab>
