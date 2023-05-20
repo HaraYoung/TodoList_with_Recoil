@@ -4,7 +4,6 @@ export interface IForm {
   value: string;
 }
 
-
 export const categories = atom<string[]>({
   key: "categories",
   default: ['ALL', 'DOING', 'DONE'],

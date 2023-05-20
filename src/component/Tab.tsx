@@ -5,7 +5,9 @@ import { useRecoilState } from "recoil";
 import { ReactNode } from "react";
 
 const TabBtn = styled.button`
-  width: 130px;
+  text-align: center;
+  min-width: 5em;
+  max-width: 5em;
   height: 40px;
   font-family: "Lato", sans-serif;
   font-weight: 500;
@@ -13,8 +15,9 @@ const TabBtn = styled.button`
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-  margin: 20px;
+  margin: 0.5em;
   outline: none;
+  word-break: keep-all;
   &.tab {
     background: #000;
     color: #fff;

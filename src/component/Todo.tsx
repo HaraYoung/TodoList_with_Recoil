@@ -3,9 +3,36 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { ITodo, categories, todoState } from "../atoms";
 
+const TodoContainer = styled.div`
+  background-color: ${(props) => props.theme.boxColor};
+  border-radius: 5px;
+  margin: 0.5em;
+  div {
+    padding: 0.5em;
+    &:first-child {
+      
+      span {
+        display: inline-block;
+        padding: 1em;
+        min-width: 10em;
+        max-width: 10em;
+        font-weight: 600;
+        word-break: keep-all;
+        line-height: 1.5;
+      }
+    }
+    &:last-child {
+      margin-bottom: 0.5em;
+      padding-top: 0;
+      padding-left: 1em;
+    }
+  }
+`;
+
 const Btn = styled.button`
+  text-align: center;
   margin: 0 0.2em;
-  width: 80px;
+  width: 5em;
   padding: 0.2em 0.5em;
   border: 2px solid #000;
   font-family: "Lato", sans-serif;
@@ -19,16 +46,31 @@ const Btn = styled.button`
   &:after {
     position: absolute;
     content: "";
-    top: 5px;
-    left: 6px;
+    top: 4px;
+    left: 5px;
     width: 82%;
-    height: 60%;
+    height: 61%;
     border: 1px solid #000;
     opacity: 0;
     transition: all 0.3s ease;
   }
   &:hover:after {
     opacity: 1;
+  }
+`;
+
+const CategoryBtn = styled.button`
+  margin-right: 0.5em;
+  padding: 0.3em 0.5em;
+  background-color: ${(props) => props.theme.bgColor};
+  border: none;
+  border-radius: 5px;
+  box-shadow: ${(props) => props.theme.boxShadow};
+  &:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    transition: 0.3s ease all;
   }
 `;
 
@@ -83,7 +125,7 @@ const Todo = ({ id, text, category }: ITodo) => {
     });
   };
   return (
-    <li>
+    <TodoContainer>
       <div>
         <span>{text}</span>
         <Btn onClick={() => onClickEdit(id, text)}>EDIT</Btn>
@@ -94,13 +136,13 @@ const Todo = ({ id, text, category }: ITodo) => {
           (item, idx) =>
             item !== "ALL" &&
             category !== item && (
-              <button key={idx} onClick={() => onClickCategory(item)}>
+              <CategoryBtn key={idx} onClick={() => onClickCategory(item)}>
                 {item}
-              </button>
+              </CategoryBtn>
             )
         )}
       </div>
-    </li>
+    </TodoContainer>
   );
 };
 

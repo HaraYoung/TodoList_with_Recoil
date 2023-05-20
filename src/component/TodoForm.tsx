@@ -10,7 +10,7 @@ const TodoForm = () => {
     setValue,
     formState: { errors },
   } = useForm<IForm>();
-  const onSubmit = ({ value }: IForm) => {
+  const onSubmitTodo = ({ value }: IForm) => {
     setTodos((oldTodos) => [
       { id: Date.now(), text: value, category: 'DOING' },
       ...oldTodos,
@@ -19,17 +19,16 @@ const TodoForm = () => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmitTodo)}>
         <input
           type="text"
-          placeholder="write a todo!"
+          placeholder="Write a todo!"
           {...register("value", {
             required: "Please write todo",
           })}
         />
-        <button>add todo</button>
+        <button>Add To Do</button>
       </form>
-
       <span>{errors?.value?.message as string}</span>
     </div>
   );
