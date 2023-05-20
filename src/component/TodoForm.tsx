@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
-import { IForm, todoState } from "../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { IForm, categoryState, todoState } from "../atoms";
 
 const TodoForm = () => {
   const setTodos = useSetRecoilState(todoState);
+  const category = useRecoilValue(categoryState)
   const {
     register,
     handleSubmit,
@@ -11,8 +12,10 @@ const TodoForm = () => {
     formState: { errors },
   } = useForm<IForm>();
   const onSubmitTodo = ({ value }: IForm) => {
+    let newCategory = category;
+    if(newCategory === 'ALL') { newCategory = 'DOING'}
     setTodos((oldTodos) => [
-      { id: Date.now(), text: value, category: 'DOING' },
+      { id: Date.now(), text: value, category: newCategory },
       ...oldTodos,
     ]);
     setValue("value", "");

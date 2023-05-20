@@ -27,9 +27,9 @@ const Container = styled.div`
     input {
       padding: 0.2em 0.5em;
       border: none;
-      border-bottom: 2px solid ${(props)=> props.theme.textColor};
+      border-bottom: 2px solid ${(props) => props.theme.textColor};
       background-color: transparent;
-      color:${(props)=> props.theme.textColor};
+      color: ${(props) => props.theme.textColor};
     }
     button {
       display: inline-block;
@@ -38,7 +38,7 @@ const Container = styled.div`
       border: none;
       background-color: ${(props) => props.theme.boxColor};
       box-shadow: ${(props) => props.theme.boxShadow};
-      color:${(props)=> props.theme.textColor};
+      color: ${(props) => props.theme.textColor};
       font-weight: 600;
       &:hover {
         background-color: transparent;
@@ -66,7 +66,7 @@ const TodoList = () => {
     });
     setValue("value", "");
   };
-
+  console.log(todo);
   return (
     <Container>
       <h1>Todo List</h1>
@@ -77,7 +77,10 @@ const TodoList = () => {
           placeholder="Write new category"
           {...register("value", {
             required: "Please write category",
-            maxLength : {value : 10 , message : "Maximum number of characters is 10."}
+            maxLength: {
+              value: 10,
+              message: "Maximum number of characters is 10.",
+            },
           })}
         />
         <button>Add Category</button>

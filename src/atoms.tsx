@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
 
-export const darkThemeState = atom({
+export const darkmode = atom({
   key: 'darkTheme',
   default: false,
 });

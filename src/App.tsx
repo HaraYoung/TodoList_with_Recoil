@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 import { darkTheme, lightTheme } from "./Themes";
-import { darkThemeState } from "./atoms";
+import { darkmode } from "./atoms";
 import { useRecoilState } from "recoil";
 
 import TodoList from "./pages/TodoList";
@@ -25,14 +25,14 @@ const GlobalStyle = createGlobalStyle`
     color: initial;
   }
 `;
-const ThemeBtn = styled.button<{ darkThemeState: string }>`
+const ThemeBtn = styled.button<{ darkmode: string }>`
   border: none;
   position: fixed;
   z-index: 9999;
   left: 3%;
   bottom: 3%;
   padding: ${(props) =>
-    props.darkThemeState === "true" ? "1em" : "1em 1.2em"};
+    props.darkmode === "true" ? "1em" : "1em 1.2em"};
   border-radius: 50px;
   color: ${(props) => props.theme.accentColor};
   background-color: ${(props) => props.theme.textColor};
@@ -44,7 +44,7 @@ const ThemeBtn = styled.button<{ darkThemeState: string }>`
 `;
 
 function App() {
-  const [isDark, setIsDark] = useRecoilState(darkThemeState);
+  const [isDark, setIsDark] = useRecoilState(darkmode);
 
   return (
     <>
@@ -53,7 +53,7 @@ function App() {
         <TodoList />
         <ThemeBtn
           onClick={() => setIsDark((curr) => !curr)}
-          darkThemeState={isDark.toString()}
+          darkmode={isDark.toString()}
         >
           <FontAwesomeIcon icon={isDark ? faSun : faMoon} size="2x" />
         </ThemeBtn>
