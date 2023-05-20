@@ -120,10 +120,14 @@ const Todo = ({ id, text, category }: ITodo) => {
     }
   };
   const onClickDelete = (id: ITodo["id"]) => {
-    setTodo((todo) => {
-      const targetIdx = todo.findIndex((item) => item.id === id);
-      return [...todo.slice(0, targetIdx).concat(...todo.slice(targetIdx + 1))];
-    });
+    let deleteAlert = window.confirm('Are you sure you want to delete the selected to do?');
+    if(deleteAlert) {
+      window.alert("Deleted.");
+      setTodo((todo) => {
+        const targetIdx = todo.findIndex((item) => item.id === id);
+        return [...todo.slice(0, targetIdx).concat(...todo.slice(targetIdx + 1))];
+      });
+    }else window.alert("Canceled."); 
   };
   return (
     <TodoContainer>

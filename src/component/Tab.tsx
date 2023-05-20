@@ -80,9 +80,8 @@ const TabBtn = styled.button`
     transition: none;
   }
 `;
-
 declare global {
-  interface Window {
+  export interface Window {
     confirm(message: string): boolean;
   }
 }
@@ -94,7 +93,6 @@ const Tab = ({ children }: { children: ReactNode }) => {
     setCategory(children as string);
   };
   const onClickDeleteCategory = (category: string) => {
-
     const isCategory = todo.filter((item) => {
       return item.category === category;
     });
@@ -105,15 +103,15 @@ const Tab = ({ children }: { children: ReactNode }) => {
         "Are you sure you want to delete the category?"
       );
       if (deleteAlert) {
-        window.alert("Deleted.")
+        window.alert("Deleted.");
         setCategories((arr) => {
           const targetIdx = arr.findIndex((item) => item === category);
-          return [...arr.slice(0, targetIdx).concat(...arr.slice(targetIdx + 1))];
+          return [
+            ...arr.slice(0, targetIdx).concat(...arr.slice(targetIdx + 1)),
+          ];
         });
         setCategory("ALL");
-      }
-      else window.alert("Canceled.");
-
+      } else window.alert("Canceled.");
     }
   };
   return (
