@@ -1,5 +1,10 @@
 import { atom, selector } from "recoil";
 
+export const darkThemeState = atom({
+  key: 'darkTheme',
+  default: false,
+});
+
 export interface IForm {
   value: string;
 }

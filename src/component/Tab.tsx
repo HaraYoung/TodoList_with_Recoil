@@ -19,15 +19,13 @@ const TabBtn = styled.button`
   outline: none;
   word-break: keep-all;
   &.tab {
-    background: #000;
-    color: #fff;
+    background:${(props)=> props.theme.textColor};
+    color: ${(props)=> props.theme.boxColor};
     line-height: 42px;
     border: none;
     &:hover {
       background: transparent;
-      color: #000;
-      box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
-        7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
+      color: ${(props)=> props.theme.textColor};
     }
     &:before,
     &:after {
@@ -37,7 +35,7 @@ const TabBtn = styled.button`
       right: 0;
       height: 2px;
       width: 0;
-      background: #000;
+      background:${(props)=> props.theme.textColor};
       transition: 400ms ease all;
     }
     &:after {
@@ -52,12 +50,9 @@ const TabBtn = styled.button`
       transition: 800ms ease all;
     }
   }
-
   &.active {
     background: transparent;
-    color: #000;
-    box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
-      7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
+    color: ${(props)=> props.theme.textColor};
     transition: none;
   }
 `;

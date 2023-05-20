@@ -27,8 +27,9 @@ const Container = styled.div`
     input {
       padding: 0.2em 0.5em;
       border: none;
-      border-bottom: 2px solid ;
+      border-bottom: 2px solid ${(props)=> props.theme.textColor};
       background-color: transparent;
+      color:${(props)=> props.theme.textColor};
     }
     button {
       display: inline-block;
@@ -37,6 +38,7 @@ const Container = styled.div`
       border: none;
       background-color: ${(props) => props.theme.boxColor};
       box-shadow: ${(props) => props.theme.boxShadow};
+      color:${(props)=> props.theme.textColor};
       font-weight: 600;
       &:hover {
         background-color: transparent;

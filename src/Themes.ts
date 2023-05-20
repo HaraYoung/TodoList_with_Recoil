@@ -3,8 +3,8 @@ import { DefaultTheme } from "styled-components";
 export const darkTheme: DefaultTheme = {
   bgColor: "#3A4750",
   boxColor: '#303841',
-  boxTextColor: 'gainsboro',
-  textColor: "#EEEEEE",
+  boxTextColor: '#F1F6F9',
+  textColor: "#DDDDDD",
   accentColor: "#00ADB5",
   boxShadow : 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px',
   hoverBoxShadow : '#00ADB5 0px 2px 10px 0px inset'

@@ -34,7 +34,7 @@ const Btn = styled.button`
   margin: 0 0.2em;
   width: 5em;
   padding: 0.2em 0.5em;
-  border: 2px solid #000;
+  border: 2px solid ${(props)=> props.theme.textColor};
   font-family: "Lato", sans-serif;
   font-weight: 500;
   background: transparent;
@@ -43,6 +43,7 @@ const Btn = styled.button`
   position: relative;
   display: inline-block;
   outline: none;
+  color: ${(props)=> props.theme.textColor};
   &:after {
     position: absolute;
     content: "";
@@ -50,7 +51,7 @@ const Btn = styled.button`
     left: 5px;
     width: 82%;
     height: 61%;
-    border: 1px solid #000;
+    border: 1px solid ${(props)=> props.theme.textColor};
     opacity: 0;
     transition: all 0.3s ease;
   }
@@ -62,14 +63,14 @@ const Btn = styled.button`
 const CategoryBtn = styled.button`
   margin-right: 0.5em;
   padding: 0.3em 0.5em;
-  background-color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.boxTextColor};
   border: none;
   border-radius: 5px;
   box-shadow: ${(props) => props.theme.boxShadow};
   &:hover {
     cursor: pointer;
-    background-color: black;
-    color: white;
+    background-color: ${(props)=> props.theme.bgColor};
+    color: ${(props)=> props.theme.textColor};
     transition: 0.3s ease all;
   }
 `;
