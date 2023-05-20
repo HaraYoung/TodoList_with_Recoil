@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
-import { ECategories, todoState } from "../atoms";
+import { IForm, todoState } from "../atoms";
 
 const TodoForm = () => {
   const setTodos = useSetRecoilState(todoState);
@@ -9,13 +9,13 @@ const TodoForm = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm();
-  const onSubmit = ({ todo }: any) => {
+  } = useForm<IForm>();
+  const onSubmit = ({ value }: IForm) => {
     setTodos((oldTodos) => [
-      { id: Date.now(), text: todo, category: ECategories.DOING },
+      { id: Date.now(), text: value, category: 'DOING' },
       ...oldTodos,
     ]);
-    setValue("todo", "");
+    setValue("value", "");
   };
   return (
     <div>
@@ -23,14 +23,14 @@ const TodoForm = () => {
         <input
           type="text"
           placeholder="write a todo!"
-          {...register("todo", {
+          {...register("value", {
             required: "Please write todo",
           })}
         />
         <button>add todo</button>
       </form>
 
-      <span>{errors?.todo?.message as string}</span>
+      <span>{errors?.value?.message as string}</span>
     </div>
   );
 };

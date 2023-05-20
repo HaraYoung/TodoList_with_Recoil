@@ -1,15 +1,19 @@
 import { atom, selector } from "recoil";
 
-export enum ECategories {
-  "ALL" = "ALL",
-  "DOING" = "DOING",
-  "DONE" = "DONE",
+export interface IForm {
+  value: string;
 }
+
+
+export const categories = atom<string[]>({
+  key: "categories",
+  default: ['ALL', 'DOING', 'DONE'],
+});
 
 export interface ITodo {
   id: number;
   text: string;
-  category: ECategories;
+  category: string;
 }
 
 export const todoState = atom<ITodo[]>({
@@ -18,9 +22,9 @@ export const todoState = atom<ITodo[]>({
 });
 
 //사용자가 선택한 카테고리
-export const categoryState = atom<ECategories>({
+export const categoryState = atom<string>({
   key: "category",
-  default: ECategories.ALL,
+  default: 'ALL',
 });
 
 export const todoSelector = selector({
