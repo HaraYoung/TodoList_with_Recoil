@@ -2,7 +2,7 @@
   "name": "todo-app-with-recoil",
   "version": "0.1.0",
   "private": true,
-  "homepage:": "https://HaraYoung.github.io/TodoList_with_Recoil",
+  "homepage": "https://HaraYoung.github.io/TodoList_with_Recoil",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
