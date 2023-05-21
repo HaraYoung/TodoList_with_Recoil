@@ -1664,11 +1664,6 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
-"@remix-run/router@1.6.2":
-  version "1.6.2"
-  resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.6.2.tgz"
-  integrity sha512-LzqpSrMK/3JBAVBI9u3NWtOhWNw5AMQfrUFYB0+bDHTSw17z++WJLsPsxAuK+oSddsxk4d7F/JcdDPM1M5YAhA==
-
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.1"
   resolved "https://registry.npmjs.org/@rollup/plugin-babel/-/plugin-babel-5.3.1.tgz"
@@ -4813,7 +4808,7 @@ get-symbol-description@^1.0.0:
 
 gh-pages@^5.0.0:
   version "5.0.0"
-  resolved "https://registry.npmjs.org/gh-pages/-/gh-pages-5.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/gh-pages/-/gh-pages-5.0.0.tgz#e0893272a0e33f0453e53a3c017c33b91ddd6394"
   integrity sha512-Nqp1SjkPIB94Xw/3yYNTUL+G2dxlhjvv1zeN/4kMC1jfViTEqhtVz/Ba1zSXHuvXCN9ADNS1dN4r5/J/nZWEQQ==
   dependencies:
     async "^3.2.4"
@@ -7804,21 +7799,6 @@ react-refresh@^0.11.0:
   version "0.11.0"
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.11.0.tgz"
   integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
-
-react-router-dom@^6.11.1:
-  version "6.11.2"
-  resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.11.2.tgz"
-  integrity sha512-JNbKtAeh1VSJQnH6RvBDNhxNwemRj7KxCzc5jb7zvDSKRnPWIFj9pO+eXqjM69gQJ0r46hSz1x4l9y0651DKWw==
-  dependencies:
-    "@remix-run/router" "1.6.2"
-    react-router "6.11.2"
-
-react-router@6.11.2:
-  version "6.11.2"
-  resolved "https://registry.npmjs.org/react-router/-/react-router-6.11.2.tgz"
-  integrity sha512-74z9xUSaSX07t3LM+pS6Un0T55ibUE/79CzfZpy5wsPDZaea1F8QkrsiyRnA2YQ7LwE/umaydzXZV80iDCPkMg==
-  dependencies:
-    "@remix-run/router" "1.6.2"
 
 react-scripts@5.0.1:
   version "5.0.1"
