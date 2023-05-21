@@ -2,6 +2,7 @@ import Reset from "styled-reset";
 import styled,{ ThemeProvider, createGlobalStyle } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from 'react-helmet';
 
 import { darkTheme, lightTheme } from "./Themes";
 import { darkmode } from "./atoms";
@@ -50,6 +51,9 @@ function App() {
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
+        <Helmet>
+          <title>To Do App</title>
+        </Helmet>
         <TodoList />
         <ThemeBtn
           onClick={() => setIsDark((curr) => !curr)}
