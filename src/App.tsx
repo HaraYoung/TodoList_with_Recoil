@@ -9,6 +9,7 @@ import { darkmode } from "./atoms";
 import { useRecoilState } from "recoil";
 
 import TodoList from "./pages/TodoList";
+import Board from "./pages/Board";
 
 const GlobalStyle = createGlobalStyle` 
   ${Reset}
@@ -54,7 +55,8 @@ function App() {
         <Helmet>
           <title>To Do App</title>
         </Helmet>
-        <TodoList />
+        {/* <TodoList /> */}
+        <Board />
         <ThemeBtn
           onClick={() => setIsDark((curr) => !curr)}
           darkmode={isDark.toString()}

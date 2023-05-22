@@ -12,10 +12,19 @@ export interface IForm {
   value: string;
 }
 
+export const testTodo = atom<{ [key: string]: string[] }>({
+  key: "toDo",
+  default: {
+    "To Do": ["a", "b"],
+    Doing: ["c", "d", "e"],
+    Done: ["f"],
+  },
+});
+
 export const categories = atom<string[]>({
   key: "categories",
   default: ["ALL", "DOING", "DONE"],
-  effects_UNSTABLE: [persistAtom]
+  effects_UNSTABLE: [persistAtom],
 });
 
 export interface ITodo {
@@ -27,8 +36,7 @@ export interface ITodo {
 export const todoState = atom<ITodo[]>({
   key: "todo",
   default: [],
-  effects_UNSTABLE: [persistAtom]
-
+  effects_UNSTABLE: [persistAtom],
 });
 
 //사용자가 선택한 카테고리

@@ -12,9 +12,9 @@ export const darkTheme: DefaultTheme = {
 export const lightTheme: DefaultTheme = {
   bgColor: "#EEEEEE",
   boxColor: '#CFD2CF',
-  boxTextColor: 'gray',
+  boxTextColor: '#27374D',
   textColor: "#303841",
   accentColor: "#00ADB5",
   boxShadow : 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px',
-  hoverBoxShadow : 'black 0px 0px 9px 0px inset'
+  hoverBoxShadow : 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
 }
