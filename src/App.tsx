@@ -3,6 +3,7 @@ import styled,{ ThemeProvider, createGlobalStyle } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from 'react-helmet';
+import { Routes, Route } from "react-router-dom";
 
 import { darkTheme, lightTheme } from "./Themes";
 import { darkmode } from "./atoms";
@@ -10,6 +11,7 @@ import { useRecoilState } from "recoil";
 
 import TodoList from "./pages/TodoList";
 import Board from "./pages/Board";
+import NotFound from "./component/NotFound";
 
 const GlobalStyle = createGlobalStyle` 
   ${Reset}
@@ -55,14 +57,21 @@ function App() {
         <Helmet>
           <title>To Do App</title>
         </Helmet>
-        <TodoList />
-        {/* <Board /> */}
+        {/* <TodoList /> */}
         <ThemeBtn
           onClick={() => setIsDark((curr) => !curr)}
           darkmode={isDark.toString()}
         >
           <FontAwesomeIcon icon={isDark ? faSun : faMoon} size="2x" />
         </ThemeBtn>
+        <Routes>
+          <Route path="/" element={<Board />} />
+          {/* <Route path=":coinId" element={<Coin />}>
+            <Route path="chart" element={<Chart />} />
+            <Route path="price" element={<Price />} />
+          </Route> */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </ThemeProvider>
     </>
   );
