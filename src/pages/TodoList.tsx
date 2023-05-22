@@ -46,6 +46,10 @@ const Container = styled.div`
       }
     }
   }
+  .error-msg{
+    color: red;
+    font-weight: bold;
+  }
 `;
 
 const TodoList = () => {
@@ -84,7 +88,7 @@ const TodoList = () => {
         />
         <button>Add Category</button>
       </form>
-      <span>{errors?.value?.message as string}</span>
+      <span className="error-msg">{errors?.value?.message as string}</span>
       <div style={{ display: "flex" }}>
         {categoryArr.map((item, idx) => (
           <Tab key={idx}>{item}</Tab>

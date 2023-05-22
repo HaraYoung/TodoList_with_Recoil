@@ -55,8 +55,8 @@ function App() {
         <Helmet>
           <title>To Do App</title>
         </Helmet>
-        {/* <TodoList /> */}
-        <Board />
+        <TodoList />
+        {/* <Board /> */}
         <ThemeBtn
           onClick={() => setIsDark((curr) => !curr)}
           darkmode={isDark.toString()}

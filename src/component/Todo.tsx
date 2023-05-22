@@ -10,7 +10,6 @@ const TodoContainer = styled.div`
   div {
     padding: 0.5em;
     &:first-child {
-      
       span {
         display: inline-block;
         padding: 1em;
@@ -34,7 +33,7 @@ const Btn = styled.button`
   margin: 0 0.2em;
   width: 5em;
   padding: 0.2em 0.5em;
-  border: 2px solid ${(props)=> props.theme.textColor};
+  border: 2px solid ${(props) => props.theme.textColor};
   font-family: "Lato", sans-serif;
   font-weight: 500;
   background: transparent;
@@ -43,7 +42,7 @@ const Btn = styled.button`
   position: relative;
   display: inline-block;
   outline: none;
-  color: ${(props)=> props.theme.textColor};
+  color: ${(props) => props.theme.textColor};
   &:after {
     position: absolute;
     content: "";
@@ -51,7 +50,7 @@ const Btn = styled.button`
     left: 5px;
     width: 82%;
     height: 61%;
-    border: 1px solid ${(props)=> props.theme.textColor};
+    border: 1px solid ${(props) => props.theme.textColor};
     opacity: 0;
     transition: all 0.3s ease;
   }
@@ -61,6 +60,7 @@ const Btn = styled.button`
 `;
 
 const CategoryBtn = styled.button`
+  color: ${(props) => props.theme.bgColor};
   margin-right: 0.5em;
   padding: 0.3em 0.5em;
   background-color: ${(props) => props.theme.boxTextColor};
@@ -69,8 +69,8 @@ const CategoryBtn = styled.button`
   box-shadow: ${(props) => props.theme.boxShadow};
   &:hover {
     cursor: pointer;
-    background-color: ${(props)=> props.theme.bgColor};
-    color: ${(props)=> props.theme.textColor};
+    background-color: ${(props) => props.theme.bgColor};
+    color: ${(props) => props.theme.textColor};
     transition: 0.3s ease all;
   }
 `;
@@ -120,14 +120,18 @@ const Todo = ({ id, text, category }: ITodo) => {
     }
   };
   const onClickDelete = (id: ITodo["id"]) => {
-    let deleteAlert = window.confirm('Are you sure you want to delete the selected to do?');
-    if(deleteAlert) {
+    let deleteAlert = window.confirm(
+      "Are you sure you want to delete the selected to do?"
+    );
+    if (deleteAlert) {
       window.alert("Deleted.");
       setTodo((todo) => {
         const targetIdx = todo.findIndex((item) => item.id === id);
-        return [...todo.slice(0, targetIdx).concat(...todo.slice(targetIdx + 1))];
+        return [
+          ...todo.slice(0, targetIdx).concat(...todo.slice(targetIdx + 1)),
+        ];
       });
-    }else window.alert("Canceled."); 
+    } else window.alert("Canceled.");
   };
   return (
     <TodoContainer>
