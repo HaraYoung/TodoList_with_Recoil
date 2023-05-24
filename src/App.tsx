@@ -1,9 +1,9 @@
 import Reset from "styled-reset";
-import styled,{ ThemeProvider, createGlobalStyle } from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from 'react-helmet';
-import { Routes, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 
 import { darkTheme, lightTheme } from "./Themes";
 import { darkmode } from "./atoms";
@@ -35,8 +35,7 @@ const ThemeBtn = styled.button<{ darkmode: string }>`
   z-index: 9999;
   left: 3%;
   bottom: 3%;
-  padding: ${(props) =>
-    props.darkmode === "true" ? "1em" : "1em 1.2em"};
+  padding: ${(props) => (props.darkmode === "true" ? "1em" : "1em 1.2em")};
   border-radius: 50px;
   color: ${(props) => props.theme.accentColor};
   background-color: ${(props) => props.theme.textColor};
@@ -47,8 +46,17 @@ const ThemeBtn = styled.button<{ darkmode: string }>`
   }
 `;
 
+const Title = styled.h1`
+  font-size: 48px;
+  font-weight: 700;
+  color: ${(props) => props.theme.textColor};
+`;
+
 function App() {
   const [isDark, setIsDark] = useRecoilState(darkmode);
+  const location = useLocation();
+  const currentUrl = location.pathname; // '/board'
+  console.log(currentUrl);
 
   return (
     <>
@@ -57,7 +65,12 @@ function App() {
         <Helmet>
           <title>To Do App</title>
         </Helmet>
-        {/* <TodoList /> */}
+        {currentUrl === "/" ? (
+          <Link to="board">Board</Link>
+        ) : (
+          <Link to="/">List</Link>
+        )}
+        <Title>Todo {currentUrl === "/" ? "List" : "Board"}</Title>
         <ThemeBtn
           onClick={() => setIsDark((curr) => !curr)}
           darkmode={isDark.toString()}
@@ -65,11 +78,8 @@ function App() {
           <FontAwesomeIcon icon={isDark ? faSun : faMoon} size="2x" />
         </ThemeBtn>
         <Routes>
-          <Route path="/" element={<Board />} />
-          {/* <Route path=":coinId" element={<Coin />}>
-            <Route path="chart" element={<Chart />} />
-            <Route path="price" element={<Price />} />
-          </Route> */}
+          <Route path="/" element={<TodoList />} />
+          <Route path="/board" element={<Board />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </ThemeProvider>

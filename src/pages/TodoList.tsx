@@ -1,6 +1,7 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+
 import {
   categoryState,
   todoSelector,
@@ -17,11 +18,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  h1 {
-    font-size: 48px;
-    font-weight: 700;
-    color: ${(props) => props.theme.textColor};
-  }
+
   form {
     margin: 1em;
     input {
@@ -94,7 +91,7 @@ const TodoList = () => {
           <Tab key={idx}>{item}</Tab>
         ))}
       </div>
-      <TodoForm />
+      <TodoForm currentCategory={category}/>
       <br />
       <ul>
         {todoArr.map((todo) => (

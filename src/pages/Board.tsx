@@ -1,14 +1,12 @@
-import { memo } from "react";
 import {
   DragDropContext,
-  Droppable,
-  Draggable,
   DropResult,
 } from "react-beautiful-dnd";
 import styled from "styled-components";
+import { useRecoilState, useRecoilValue } from "recoil";
+
+import { todoState, categories } from "../atoms";
 import BoardItem from "../component/BoardItem";
-import { useRecoilState } from "recoil";
-import { testTodo } from "../atoms";
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,44 +25,59 @@ const Boards = styled.div`
   gap: 10px;
 `;
 
-const Board = memo(() => {
-  const [toDos, setToDos] = useRecoilState(testTodo);
-  const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
+const Board = () => {
+  const [toDos, setToDos] = useRecoilState(todoState);
+  const category = useRecoilValue(categories);
+  const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return;
-    //source board가 destination board와 같은지 체크
+    //source board가 destination board와 같은 경우
     if (destination?.droppableId === source.droppableId) {
-      //변화가 일어난 보드에만 복사
-      const copyTodo = [...toDos[source.droppableId]];
+      const copyTodo = toDos.filter(
+        (item) => item.category === source.droppableId
+      ); //변화가 일어난 보드
+      const remainTodo = toDos.filter(
+        (item) => item.category !== source.droppableId
+      ); //나머지 보드
+      const sliceTarget = copyTodo[source.index];
       copyTodo.splice(source.index, 1);
-      copyTodo.splice(destination?.index, 0, draggableId);
-      setToDos({ ...toDos, [source.droppableId]: copyTodo });
+      copyTodo.splice(destination?.index, 0, sliceTarget);
+      setToDos(remainTodo.concat(copyTodo));
     }
+    //source board가 destination board와 다른 경우
     if (destination?.droppableId !== source.droppableId) {
-      const startBoard = [...toDos[source.droppableId]];
-      const targetBoard = [...toDos[destination.droppableId]];
+      const startBoard = toDos.filter(
+        (item) => item.category === source.droppableId
+      );
+      const targetBoard = toDos.filter(
+        (item) => item.category === destination.droppableId
+      );
+      //target 카테고리 변경
+      const changeCategory = [...startBoard];
+      changeCategory[source.index] = {
+        ...changeCategory[source.index],
+        category: destination.droppableId,
+      };
       startBoard.splice(source.index, 1);
-      targetBoard.splice(destination?.index, 0, draggableId);
-      setToDos({
-        ...toDos,
-        [source.droppableId]: startBoard,
-        [destination.droppableId]: targetBoard,
-      });
+      targetBoard.splice(destination?.index, 0, changeCategory[source.index]);
+      setToDos(startBoard.concat(targetBoard));
     }
   };
-
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
         <Wrapper>
           <Boards>
-            {Object.keys(toDos).map((board) => (
-              <BoardItem key={board} boardId={board} toDos={toDos[board]} />
-            ))}
+            {category.map(
+              (board) =>
+                board !== "ALL" && (
+                  <BoardItem key={board} boardId={board} category={board} />
+                )
+            )}
           </Boards>
         </Wrapper>
       </DragDropContext>
     </>
   );
-});
+};
 
 export default Board;

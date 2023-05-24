@@ -12,15 +12,6 @@ export interface IForm {
   value: string;
 }
 
-export const testTodo = atom<{ [key: string]: string[] }>({
-  key: "toDo",
-  default: {
-    "To Do": ["a", "b"],
-    Doing: ["c", "d", "e"],
-    Done: ["f"],
-  },
-});
-
 export const categories = atom<string[]>({
   key: "categories",
   default: ["ALL", "DOING", "DONE"],

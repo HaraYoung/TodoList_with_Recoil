@@ -1,12 +1,16 @@
-import { Droppable } from "react-beautiful-dnd";
+import { memo } from "react";
 import styled from "styled-components";
+import { Droppable } from "react-beautiful-dnd";
+import { useRecoilValue } from "recoil";
+
+import { todoState } from "../atoms";
+import TodoForm from "./TodoForm";
 import DragabbleCard from "./DragabbleCard";
 
 interface IBoardProps {
-  toDos: string[];
+  category: string;
   boardId: string;
 }
-
 interface IAreaProps {
   isDraggingFromThis: boolean;
   isDraggingOver: boolean;
@@ -41,11 +45,14 @@ const Area = styled.div<IAreaProps>`
   padding: 20px;
 `;
 
-const BoardItem = ({ toDos, boardId }: IBoardProps) => {
+const BoardItem = memo(({ category, boardId }: IBoardProps) => {
+  const toDos = useRecoilValue(todoState);
+  const filteredCategory = toDos.filter((item) => item.category === category);
   return (
     <>
       <Board>
         <Title>{boardId}</Title>
+        <TodoForm currentCategory={boardId} />
         <Droppable key={boardId} droppableId={boardId}>
           {(magic, info) => (
             <Area
@@ -54,8 +61,8 @@ const BoardItem = ({ toDos, boardId }: IBoardProps) => {
               ref={magic.innerRef}
               {...magic.droppableProps}
             >
-              {toDos.map((todo, idx) => (
-                <DragabbleCard key={todo} todo={todo} index={idx} />
+              {filteredCategory.map((todo, idx) => (
+                <DragabbleCard key={todo.id} todo={todo.text} index={idx} />
               ))}
               {/* 끝날 때 두는 무언가 */}
               {magic.placeholder}
@@ -65,6 +72,6 @@ const BoardItem = ({ toDos, boardId }: IBoardProps) => {
       </Board>
     </>
   );
-};
+});
 
 export default BoardItem;
