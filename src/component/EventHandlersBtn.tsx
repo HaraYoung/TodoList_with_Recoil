@@ -1,4 +1,4 @@
-import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState, useRecoilState } from "recoil";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
