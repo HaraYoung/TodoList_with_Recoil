@@ -87,7 +87,7 @@ const BoardItem = memo(({ category, boardId }: IBoardProps) => {
               {...magic.droppableProps}
             >
               {filteredCategory.map((todo, idx) => (
-                <DragabbleCard key={todo.id} todo={todo.text} index={idx} />
+                <DragabbleCard key={todo.id} todo={todo.text} index={idx} id={todo.id} category={todo.category}/>
               ))}
               {/* 끝날 때 두는 무언가 */}
               {magic.placeholder}

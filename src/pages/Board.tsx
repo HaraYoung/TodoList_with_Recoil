@@ -2,7 +2,7 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { todoState, categories, ITodo } from "../atoms";
+import { todoState, categories } from "../atoms";
 import BoardItem from "../component/BoardItem";
 
 const Wrapper = styled.div`
@@ -77,7 +77,7 @@ const Board = () => {
         destination.index === targetBoard.length ? endItem + 1 : endItem,
         0,
         changeCategory
-      ); 
+      );
       setToDos(copyTodo);
     }
   };

@@ -2,12 +2,17 @@ import { memo } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
+import EventHandlersBtn from "./EventHandlersBtn";
 interface ICardProps {
   todo: string;
   index: number;
+  id: number;
+  category: string;
 }
 
 const Card = styled.div<{ $isDragging: boolean }>`
+  display: flex;
+  justify-content: space-between;
   border-radius: 5px;
   margin-bottom: 5px;
   padding: 10px;
@@ -16,7 +21,7 @@ const Card = styled.div<{ $isDragging: boolean }>`
   box-shadow: ${(props) =>
     props.$isDragging ? props.theme.hoverBoxShadow : props.theme.boxShadow};
 `;
-const DragabbleCard =  memo(({ todo, index }: ICardProps) => {
+const DragabbleCard = memo(({ todo, index, id, category }: ICardProps) => {
   return (
     <>
       <Draggable key={todo} draggableId={todo} index={index}>
@@ -28,11 +33,29 @@ const DragabbleCard =  memo(({ todo, index }: ICardProps) => {
             $isDragging={snapshot.isDragging}
           >
             {todo}
+            <span>
+              <EventHandlersBtn
+                id={id}
+                text={todo}
+                category={category}
+                isevent="EDIT"
+                type="board"
+                $isDragging={snapshot.isDragging}
+              />
+              <EventHandlersBtn
+                id={id}
+                text={todo}
+                category={category}
+                isevent="DELETE"
+                type="board"
+                $isDragging={snapshot.isDragging}
+              />
+            </span>
           </Card>
         )}
       </Draggable>
     </>
   );
-})
+});
 
 export default DragabbleCard;

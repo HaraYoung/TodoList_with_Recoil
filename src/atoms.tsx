@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom, selector, useRecoilState, useSetRecoilState } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
@@ -44,3 +44,8 @@ export const todoSelector = selector({
     return todos.filter((todo) => todo.category === category);
   },
 });
+
+export const editState = atom<boolean>({
+  key: 'edit',
+  default: false,
+})
