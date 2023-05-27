@@ -3,9 +3,10 @@ import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
 
-export const darkmode = atom({
+export const darkmode = atom<boolean>({
   key: "darkTheme",
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export interface IForm {
@@ -46,6 +47,6 @@ export const todoSelector = selector({
 });
 
 export const editState = atom<boolean>({
-  key: 'edit',
+  key: "edit",
   default: false,
-})
+});

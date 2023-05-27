@@ -9,7 +9,7 @@ const Btn = styled.button<{ $isDragging: boolean }>`
   border: none;
   cursor: pointer;
   svg {
-    padding: 0 0.2em;
+    padding: 0.2em;
     color: ${(props) => props.theme.textColor};
   }
   .edit {

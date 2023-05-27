@@ -13,6 +13,7 @@ interface ICardProps {
 const Card = styled.div<{ $isDragging: boolean }>`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-radius: 5px;
   margin-bottom: 5px;
   padding: 10px;
@@ -20,6 +21,9 @@ const Card = styled.div<{ $isDragging: boolean }>`
     props.$isDragging ? props.theme.accentColor : props.theme.bgColor};
   box-shadow: ${(props) =>
     props.$isDragging ? props.theme.hoverBoxShadow : props.theme.boxShadow};
+  span {
+    text-align: end;
+  }
 `;
 const DragabbleCard = memo(({ todo, index, id, category }: ICardProps) => {
   return (
