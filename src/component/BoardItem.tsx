@@ -36,6 +36,7 @@ const Board = styled.div`
     button {
       display: inline-block;
       margin-left: 1em;
+      margin-top: 1em;
       padding: 0.5em 1em;
       border: none;
       background-color: ${(props) => props.theme.textColor};
@@ -68,6 +69,7 @@ const Area = styled.div<IAreaProps>`
   flex-grow: 1;
   transition: background-color 0.3s ease-in-out;
   padding: 20px;
+  padding-top: 0.2em;
 `;
 
 const BoardItem = memo(({ category, boardId }: IBoardProps) => {
@@ -87,7 +89,13 @@ const BoardItem = memo(({ category, boardId }: IBoardProps) => {
               {...magic.droppableProps}
             >
               {filteredCategory.map((todo, idx) => (
-                <DragabbleCard key={todo.id} todo={todo.text} index={idx} id={todo.id} category={todo.category}/>
+                <DragabbleCard
+                  key={todo.id}
+                  todo={todo.text}
+                  index={idx}
+                  id={todo.id}
+                  category={todo.category}
+                />
               ))}
               {/* 끝날 때 두는 무언가 */}
               {magic.placeholder}
