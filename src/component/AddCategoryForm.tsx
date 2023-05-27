@@ -27,11 +27,6 @@ const Form = styled.form`
       transition: 0.3s ease all;
     }
   }
-
-  .error-msg {
-    color: red;
-    font-weight: bold;
-  }
 `;
 
 const AddCategoryForm = () => {
@@ -64,7 +59,9 @@ const AddCategoryForm = () => {
         />
         <button>Add Category</button>
       </Form>
-      <span className="error-msg">{errors?.value?.message as string}</span>
+      <span style={{ color: "red", fontWeight: "bold" }}>
+        {errors?.value?.message as string}
+      </span>
     </div>
   );
 };

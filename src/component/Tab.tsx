@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-import { categoryState, categories, todoState } from "../atoms";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { categoryState } from "../atoms";
+import { useRecoilState } from "recoil";
+import DeleteCategory from "./DeleteCategory";
 
 const TabContainer = styled.div`
   display: flex;
@@ -87,45 +86,14 @@ declare global {
 }
 const Tab = ({ children }: { children: ReactNode }) => {
   const [category, setCategory] = useRecoilState(categoryState);
-  const setCategories = useSetRecoilState(categories);
-  const todo = useRecoilValue(todoState);
   const onClickCategory = () => {
     setCategory(children as string);
   };
-  const onClickDeleteCategory = (category: string) => {
-    const isCategory = todo.filter((item) => {
-      return item.category === category;
-    });
-    if (isCategory.length > 0)
-      alert("Delete all items in the category and then delete the category");
-    else {
-      let deleteAlert = window.confirm(
-        "Are you sure you want to delete the category?"
-      );
-      if (deleteAlert) {
-        window.alert("Deleted.");
-        setCategories((arr) => {
-          const targetIdx = arr.findIndex((item) => item === category);
-          return [
-            ...arr.slice(0, targetIdx).concat(...arr.slice(targetIdx + 1)),
-          ];
-        });
-        setCategory("ALL");
-      } else window.alert("Canceled.");
-    }
-  };
+
   return (
     <TabContainer>
       {category === children && (
-        <FontAwesomeIcon
-          icon={faCircleXmark}
-          onClick={() => onClickDeleteCategory(category)}
-          className={
-            children !== "ALL" && children !== "DOING" && children !== "DONE"
-              ? ""
-              : "opacity"
-          }
-        />
+        <DeleteCategory categoryName={children.toString()} type='list'/>
       )}
       <div>
         <TabBtn

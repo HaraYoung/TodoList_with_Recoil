@@ -31,11 +31,6 @@ const Form = styled.form`
       transition: 0.3s ease all;
     }
   }
-
-  .error-msg {
-    color: red;
-    font-weight: bold;
-  }
 `;
 
 const TodoForm = memo(({ currentCategory }: ICurrentCategory) => {
@@ -71,7 +66,9 @@ const TodoForm = memo(({ currentCategory }: ICurrentCategory) => {
         <button>Add To Do</button>
       </Form>
       <div style={{ textAlign: "center" }}>
-        <span className="error-msg">{errors?.value?.message as string}</span>
+        <span style={{ color: "red", fontWeight: "bold" }}>
+          {errors?.value?.message as string}
+        </span>
       </div>
     </div>
   );

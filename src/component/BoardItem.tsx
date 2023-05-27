@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import { todoState } from "../atoms";
 import TodoForm from "./TodoForm";
 import DragabbleCard from "./DragabbleCard";
+import DeleteCategory from "./DeleteCategory";
 
 interface IBoardProps {
   category: string;
@@ -53,6 +54,19 @@ const Board = styled.div`
   }
 `;
 
+const TitleArea = styled.div`
+  position: relative;
+  svg {
+    position: absolute;
+    right: 5%;
+    top: 0;
+    cursor: pointer;
+    &:hover {
+      color: #f96666;
+      transition: 0.2s ease all;
+    }
+  }
+`;
 const Title = styled.h2`
   text-align: center;
   font-weight: 600;
@@ -78,7 +92,14 @@ const BoardItem = memo(({ category, boardId }: IBoardProps) => {
   return (
     <>
       <Board>
-        <Title>{boardId}</Title>
+        <TitleArea>
+          <Title>{boardId}</Title>
+          {boardId === "DONE" || boardId === "DOING" ? (
+            ""
+          ) : (
+            <DeleteCategory categoryName={boardId} type='board'/>
+          )}
+        </TitleArea>
         <TodoForm currentCategory={boardId} />
         <Droppable key={boardId} droppableId={boardId}>
           {(magic, info) => (
