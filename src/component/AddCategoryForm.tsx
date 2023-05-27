@@ -1,12 +1,8 @@
-import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 
-import { IForm, todoState } from "../atoms";
-interface ICurrentCategory {
-  currentCategory: string;
-}
+import { IForm, categories } from "../atoms";
 
 const Form = styled.form`
   margin: 1em;
@@ -38,43 +34,39 @@ const Form = styled.form`
   }
 `;
 
-const TodoForm = memo(({ currentCategory }: ICurrentCategory) => {
-  const setTodos = useSetRecoilState(todoState);
+const AddCategoryForm = () => {
+  const setCategoryArr = useSetRecoilState(categories);
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
   } = useForm<IForm>();
-
-  const onSubmitTodo = ({ value }: IForm) => {
-    setTodos((oldTodos) => [
-      {
-        id: Date.now(),
-        text: value,
-        category: currentCategory === "ALL" ? "DOING" : currentCategory,
-      },
-      ...oldTodos,
-    ]);
+  const onSubmitCategory = ({ value }: IForm) => {
+    setCategoryArr((oldArr) => {
+      return [...oldArr, value];
+    });
     setValue("value", "");
   };
   return (
     <div>
-      <Form onSubmit={handleSubmit(onSubmitTodo)}>
+      <Form onSubmit={handleSubmit(onSubmitCategory)}>
         <input
           type="text"
-          placeholder="Write a todo!"
-          {...register(`value`, {
-            required: "Please write todo",
+          placeholder="Write new category"
+          {...register("value", {
+            required: "Please write category",
+            maxLength: {
+              value: 10,
+              message: "Maximum number of characters is 10.",
+            },
           })}
         />
-        <button>Add To Do</button>
+        <button>Add Category</button>
       </Form>
-      <div style={{ textAlign: "center" }}>
-        <span className="error-msg">{errors?.value?.message as string}</span>
-      </div>
+      <span className="error-msg">{errors?.value?.message as string}</span>
     </div>
   );
-});
+};
 
-export default TodoForm;
+export default AddCategoryForm;

@@ -4,6 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { todoState, categories } from "../atoms";
 import BoardItem from "../component/BoardItem";
+import AddCategoryForm from "../component/AddCategoryForm";
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ const Boards = styled.div`
 const Board = () => {
   const [toDos, setToDos] = useRecoilState(todoState);
   const category = useRecoilValue(categories);
-  const onDragEnd = ({ destination, source, draggableId }: DropResult) => {
+  const onDragEnd = ({ destination, source }: DropResult) => {
     if (!destination) return;
     // source board가 destination board와 같은 경우
     if (destination?.droppableId === source.droppableId) {
@@ -84,6 +85,9 @@ const Board = () => {
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
+        <span style={{textAlign: 'center', paddingTop: '1em'}}>
+          <AddCategoryForm />
+        </span>
         <Wrapper>
           <Boards>
             {category.map(
