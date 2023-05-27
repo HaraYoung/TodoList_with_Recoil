@@ -69,8 +69,6 @@ const TodoList = () => {
   };
   return (
     <Container>
-      <h1>Todo List</h1>
-      <br />
       <form onSubmit={handleSubmit(onSubmitCategory)}>
         <input
           type="text"

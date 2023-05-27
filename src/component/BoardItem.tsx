@@ -12,8 +12,8 @@ interface IBoardProps {
   boardId: string;
 }
 interface IAreaProps {
-  isDraggingFromThis: boolean;
-  isDraggingOver: boolean;
+  $isDraggingFromThis: boolean;
+  $isDraggingOver: boolean;
 }
 
 const Board = styled.div`
@@ -25,6 +25,31 @@ const Board = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  form {
+    text-align: center;
+    input {
+      border: none;
+      border-bottom: 2px solid ${(props) => props.theme.textColor};
+      padding: 0.2em;
+      background-color: transparent;
+    }
+    button {
+      display: inline-block;
+      margin-left: 1em;
+      padding: 0.5em 1em;
+      border: none;
+      background-color: ${(props) => props.theme.textColor};
+      box-shadow: ${(props) => props.theme.boxShadow};
+      color: ${(props) => props.theme.bgColor};
+      font-weight: 500;
+      border-radius: 3px;
+      &:hover {
+        background-color: transparent;
+        transition: 0.3s ease all;
+        color: ${(props) => props.theme.textColor};
+      }
+    }
+  }
 `;
 
 const Title = styled.h2`
@@ -35,9 +60,9 @@ const Title = styled.h2`
 `;
 const Area = styled.div<IAreaProps>`
   background-color: ${(props) =>
-    props.isDraggingOver
+    props.$isDraggingOver
       ? "#dfe6e9"
-      : props.isDraggingFromThis
+      : props.$isDraggingFromThis
       ? "#b2bec3"
       : "transparent"};
   flex-grow: 1;
@@ -56,8 +81,8 @@ const BoardItem = memo(({ category, boardId }: IBoardProps) => {
         <Droppable key={boardId} droppableId={boardId}>
           {(magic, info) => (
             <Area
-              isDraggingOver={info.isDraggingOver}
-              isDraggingFromThis={Boolean(info.draggingFromThisWith)}
+              $isDraggingOver={info.isDraggingOver}
+              $isDraggingFromThis={Boolean(info.draggingFromThisWith)}
               ref={magic.innerRef}
               {...magic.droppableProps}
             >

@@ -18,7 +18,11 @@ const TodoForm = memo(({ currentCategory }: ICurrentCategory) => {
 
   const onSubmitTodo = ({ value }: IForm) => {
     setTodos((oldTodos) => [
-      { id: Date.now(), text: value, category: currentCategory },
+      {
+        id: Date.now(),
+        text: value,
+        category: currentCategory === "ALL" ? "DOING" : currentCategory,
+      },
       ...oldTodos,
     ]);
     setValue("value", "");
@@ -40,6 +44,6 @@ const TodoForm = memo(({ currentCategory }: ICurrentCategory) => {
       </div>
     </div>
   );
-})
+});
 
 export default TodoForm;

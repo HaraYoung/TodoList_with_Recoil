@@ -1,9 +1,14 @@
 import Reset from "styled-reset";
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from "react-helmet";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import { Helmet } from "react-helmet";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSun,
+  faMoon,
+  faListUl,
+  faClipboard,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { darkTheme, lightTheme } from "./Themes";
 import { darkmode } from "./atoms";
@@ -42,7 +47,7 @@ const ThemeBtn = styled.button<{ darkmode: string }>`
   box-shadow: ${(props) => props.theme.boxShadow};
   cursor: pointer;
   &:hover {
-    box-shadow: ${(props) => props.theme.hoverBoxShadow};
+    box-shadow: #00adb5 0px 2px 10px 0px inset;
   }
 `;
 
@@ -50,14 +55,28 @@ const Title = styled.h1`
   font-size: 48px;
   font-weight: 700;
   color: ${(props) => props.theme.textColor};
+  text-align: center;
+  padding-top: 1em;
+`;
+
+const ToggleBtb = styled(Link)<{ isicon: string; }>`
+  position: fixed;
+  z-index: 9999;
+  bottom: 12%;
+  left: 3%;
+  background-color: ${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.bgColor};
+  padding: ${(props) => (props.isicon === "list" ? "0.7em" : "0.7em 0.9em")};
+  border-radius: 30px;
+  &:hover {
+    box-shadow: ${(props)=> props.theme.textColor} 0px 2px 10px 0px inset;
+  }
 `;
 
 function App() {
   const [isDark, setIsDark] = useRecoilState(darkmode);
   const location = useLocation();
-  const currentUrl = location.pathname; // '/board'
-  console.log(currentUrl);
-
+  const currentUrl = location.pathname;
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
@@ -66,11 +85,15 @@ function App() {
           <title>To Do App</title>
         </Helmet>
         {currentUrl === "/" ? (
-          <Link to="board">Board</Link>
+          <ToggleBtb to="board" isicon="board">
+            <FontAwesomeIcon icon={faClipboard} size="2x" />
+          </ToggleBtb>
         ) : (
-          <Link to="/">List</Link>
+          <ToggleBtb to="/" isicon="list">
+            <FontAwesomeIcon icon={faListUl} size="2x" />
+          </ToggleBtb>
         )}
-        <Title>Todo {currentUrl === "/" ? "List" : "Board"}</Title>
+        <Title>Todo {currentUrl === "/" ? "List" : "Board"} </Title>
         <ThemeBtn
           onClick={() => setIsDark((curr) => !curr)}
           darkmode={isDark.toString()}

@@ -7,14 +7,14 @@ interface ICardProps {
   index: number;
 }
 
-const Card = styled.div<{ isdragging: boolean }>`
+const Card = styled.div<{ $isDragging: boolean }>`
   border-radius: 5px;
   margin-bottom: 5px;
   padding: 10px;
   background-color: ${(props) =>
-    props.isdragging ? props.theme.accentColor : props.theme.bgColor};
+    props.$isDragging ? props.theme.accentColor : props.theme.bgColor};
   box-shadow: ${(props) =>
-    props.isdragging ? props.theme.hoverBoxShadow : props.theme.boxShadow};
+    props.$isDragging ? props.theme.hoverBoxShadow : props.theme.boxShadow};
 `;
 const DragabbleCard =  memo(({ todo, index }: ICardProps) => {
   return (
@@ -25,7 +25,7 @@ const DragabbleCard =  memo(({ todo, index }: ICardProps) => {
             ref={provided.innerRef}
             {...provided.dragHandleProps}
             {...provided.draggableProps}
-            isdragging={snapshot.isDragging}
+            $isDragging={snapshot.isDragging}
           >
             {todo}
           </Card>
