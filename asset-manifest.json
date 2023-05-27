@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.js": "/TodoList_with_Recoil/static/js/main.2dcf8fe7.js",
+    "main.js": "/TodoList_with_Recoil/static/js/main.f4f935d0.js",
+    "static/media/404error-img.png": "/TodoList_with_Recoil/static/media/404error-img.6f25a618d7813cc56d9b.png",
     "index.html": "/TodoList_with_Recoil/index.html",
-    "main.2dcf8fe7.js.map": "/TodoList_with_Recoil/static/js/main.2dcf8fe7.js.map"
+    "main.f4f935d0.js.map": "/TodoList_with_Recoil/static/js/main.f4f935d0.js.map"
   },
   "entrypoints": [
-    "static/js/main.2dcf8fe7.js"
+    "static/js/main.f4f935d0.js"
   ]
 }
